@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sakshi!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #ffe6f0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden; /* Prevent scrolling */
+            position: relative; /* Set position for absolutely positioned elements */
+        }
+
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            color: #ff4081;
+            text-shadow: 2px 2px 4px #ff85b3;
+            animation: pulse 2s infinite;
+            margin-bottom: 0; /* Remove default margin */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        img {
+            margin-top: 20px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid #ff85b3;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background-color: #ff85b3;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: #ff4081;
+        }
+
+        .message {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        /* Sprinkles styles */
+        .sprinkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff4081;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(600px); /* Fall distance */
+                opacity: 0;
+            }
+        }
+
+        /* Party popper styles */
+        .popper {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 30px solid #ff4081;
+            opacity: 0;
+            animation: pop 0.5s forwards;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes pop {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+
+        /* Confetti styles */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff4081;
+            animation: confettiFall linear forwards;
+            opacity: 0;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(600px); /* Fall distance */
+                opacity: 0;
+            }
+        }
+
+        /* Banner styles */
+        .banner {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 2em;
+            color: #ff4081;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banner">🎉 Celebrate with Sakshi! 🎉</div>
+    <div class="container">
+        <h1>Happy Birthday Sakshi!</h1>
+        <img src="419970838_889826386031128_8139759183261333579_n.jpg" alt="Sakshi's Birthday Photo">
+        <button onclick="startCelebration()">Click for Surprise 🎉</button>
+        <p class="message" id="birthdayMessage">Wishing you all the happiness and love in the world on your special day! 🎂🎈🎁</p>
+    </div>
+
+    <audio id="celebrationMusic" src="Happy Birthday Song!!! [TubeRipper.com]-[AudioTrimmer.com].mp3" preload="auto"></audio> <!-- Link to your music file -->
+
+    <script>
+        let sprinkleInterval;
+        let confettiInterval;
+
+        function startCelebration() {
+            const message = document.getElementById('birthdayMessage');
+            message.style.display = 'block';
+            createSprinkles();
+            sprinkleInterval = setInterval(createSprinkles, 100); // Create new sprinkles every 100ms
+            createPartyPoppers();
+            createConfetti();
+            playMusic(); // Play music when the button is clicked
+        }
+
+        function createSprinkles() {
+            const container = document.body; // Use body to position sprinkles
+
+            const sprinkle = document.createElement('div');
+            sprinkle.classList.add('sprinkle');
+
+            // Randomize position
+            sprinkle.style.left = Math.random() * window.innerWidth + 'px';
+            sprinkle.style.top = -10 + 'px'; // Start above the viewport
+
+            // Randomize size
+            const size = Math.random() * 10 + 5; // Size between 5 and 15px
+            sprinkle.style.width = size + 'px';
+            sprinkle.style.height = size + 'px';
+
+            // Append sprinkle to the body
+            container.appendChild(sprinkle);
+
+            // Animate the sprinkle
+            sprinkle.style.animationDuration = Math.random() * 2 + 1 + 's'; // Random duration between 1 and 3 seconds
+
+            // Remove sprinkle after animation ends
+            sprinkle.addEventListener('animationend', () => {
+                sprinkle.remove();
+            });
+        }
+
+        function createPartyPoppers() {
+            const container = document.body;
+
+            // Left popper
+            const leftPopper = document.createElement('div');
+            leftPopper.classList.add('popper');
+            leftPopper.style.left = '20px';
+            leftPopper.style.bottom = '20px'; // Positioning
+            container.appendChild(leftPopper);
+            leftPopper.style.animationDuration = '0.5s'; // Duration for animation
+            leftPopper.addEventListener('animationend', () => {
+                leftPopper.remove();
+            });
+
+            // Right popper
+            const rightPopper = document.createElement('div');
+            rightPopper.classList.add('popper');
+            rightPopper.style.right = '20px';
+            rightPopper.style.bottom = '20px'; // Positioning
+            container.appendChild(rightPopper);
+            rightPopper.style.animationDuration = '0.5s'; // Duration for animation
+            rightPopper.addEventListener('animationend', () => {
+                rightPopper.remove();
+            });
+        }
+
+        function createConfetti() {
+            const container = document.body;
+            confettiInterval = setInterval(() => {
+                const confettiPiece = document.createElement('div');
+                confettiPiece.classList.add('confetti');
+
+                // Randomize position
+                confettiPiece.style.left = Math.random() * window.innerWidth + 'px';
+                confettiPiece.style.top = -10 + 'px'; // Start above the viewport
+
+                // Randomize size and color
+                const size = Math.random() * 10 + 5; // Size between 5 and 15px
+                confettiPiece.style.width = size + 'px';
+                confettiPiece.style.height = size + 'px';
+                confettiPiece.style.backgroundColor = '#' + Math.floor(Math.random()*16777215).toString(16); // Random color
+
+                // Append confetti to the body
+                container.appendChild(confettiPiece);
+
+                // Animate the confetti
+                confettiPiece.style.animationDuration = Math.random() * 2 + 2 + 's'; // Random duration between 2 and 4 seconds
+
+                // Remove confetti after animation ends
+                confettiPiece.addEventListener('animationend', () => {
+                    confettiPiece.remove();
+                });
+            }, 100); // Create new confetti every 100ms
+        }
+
+        function playMusic() {
+            const music = document.getElementById('celebrationMusic');
+            music.play(); // Play the audio when the button is clicked
+        }
+    </script>
+</body>
+</html>
